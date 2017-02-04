@@ -9,7 +9,7 @@ python:
   - "3.6"
   - "pypy"
 install:
-  - pip install python-coveralls -r tests/requirements-tests.txt python-coveralls
+  - pip install python-coveralls -r tests/requirements-tests.txt
 script: pytest
 after_success:
   - coveralls --cov=calculator
