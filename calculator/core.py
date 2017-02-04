@@ -1,2 +1,4 @@
 class Calculator(object):
-    pass
+    @staticmethod
+    def add(a, b):
+        return a + b
