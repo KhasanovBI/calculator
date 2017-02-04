@@ -8,7 +8,8 @@ python:
   - "3.5"
   - "3.6"
   - "pypy"
-# command to install dependencies
-install: "pip install -r tests/requirements-tests.txt"
-# command to run tests
+install:
+  - pip install python-coveralls -r tests/requirements-tests.txt python-coveralls
 script: pytest
+after_success:
+  - coveralls --cov=calculator
