@@ -1,12 +1,25 @@
 language: python
 python:
-  - "2.7"
-  - "3.4"
-  - "3.5"
-  - "3.6"
-  - "pypy"
+  - '2.7'
+  - '3.4'
+  - '3.5'
+  - '3.6'
+  - pypy
 install:
+  - pip install -U pip wheel setuptools
   - pip install python-coveralls -r tests/requirements-tests.txt
 script: pytest --cov=calculator --cov-report=term-missing
 after_success:
   - coveralls
+before_deploy:
+  - gem install fpm
+  - fpm -s python -t deb .
+deploy:
+  provider: packagecloud
+  repository: calculator
+  username: bkhasanov
+  token:
+    secure: N2g1cxd2A21sXUbEdRvsqQEvrzgMBfI4b278hnLj2ExXI924jztzufiU9qmElRySt2hTRpmxLeCOwdW5Jae10YQItZZCr4naNhQ3Tvkww+Hf7X9Y2ZrjobbPLkJPJMpITp0+p3qHo2qNXTERp9DVxU5IqVM4mMyB4FEDGRQjHW6AK2fL5FhLwt6EHt2G1T7YdwDhOZ7E7Hp1HSrGzdmaVcMu70TdMDYPUg5b+cMxWFiD6WnVIz+8lT8hh0I/QNEb+AZVIsJnohOrikpyjzpgpagKFSmLNnLZdl839CrzThgPgrs3uFDOCKZlaxiCc47+WygDN4d1sYtleXN1sdo8iT+lCmzxJv1a2uE8+wEwAdX85bVbfq57tBvL/WCKq9+Qpj/Kt+3o8WRigA/tsBQdqbtbU73rNwHXqHjZl2jbtwNMGJ6Z1Kno6skmAm3gug+xkmK1wUUOFOF8q9Yza66jApMGiXnBTLl4xThURp19etuCV5JGCmlr/ORKkDpU0DopNXsa9By36slA4p580serNPEMXtXTMDbI/SOVr+0zrwRCkT/gJlKy8YiVyPzwG3ydyCsSnz17mSh8wxc0AzrCqBkp1XDidPwlKf5SKjp2OrpzsV25M9gV4NhjWqhvdHSXhxw+Wgj+ljU2MvlqyNbFnuXDsejo3bVtwxpt0e/TTQU=
+  dist: 'ubuntu/precise'
+  skip_cleanup: true
+  package_glob: '*.deb'
