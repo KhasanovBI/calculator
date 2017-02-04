@@ -11,4 +11,4 @@ def test_subtract_of_floats(calculator):
 
 
 def test_negative_subtract(calculator):
-    assert calculator.subtract(4, 3) == -1
+    assert calculator.subtract(4, 3) != -1
