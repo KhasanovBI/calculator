@@ -1,13 +1,15 @@
 machine:
   python:
     version: 2.7.11
-
 dependencies:
   pre:
     - gem install fpm package_cloud
+    - pip install python-coveralls
 test:
   override:
     - pyenv global 3.5.2
+  post:
+    - coveralls
 deployment:
   production:
     branch: master
