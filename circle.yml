@@ -14,4 +14,3 @@ deployment:
     commands:
       - fpm -s python -t deb .
       - package_cloud push bkhasanov/calculator/ubuntu/precise *.deb
-
