@@ -1,0 +1,17 @@
+machine:
+  python:
+    version: 2.7.11
+
+dependencies:
+  pre:
+    - gem install fpm package_cloud
+test:
+  override:
+    - pyenv global 3.5.2
+deployment:
+  production:
+    branch: master
+    commands:
+      - fpm -s python -t deb .
+      - package_cloud push bkhasanov/calculator/ubuntu/precise *.deb
+
